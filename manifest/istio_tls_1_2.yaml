@@ -1,0 +1,10 @@
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+spec:
+  profile: default
+  hub: docker.io/boanlab
+  tag: openssl_3_2_0
+  meshConfig:
+    meshMTLS:
+      cipherSuites:
+      - ECDHE-RSA-AES128-GCM-SHA256

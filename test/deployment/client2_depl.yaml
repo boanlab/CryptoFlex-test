@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: echo-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: echo-client
+  template:
+    metadata:
+      labels:
+        app: echo-client
+    spec:
+      containers:
+      - name: echo-client
+        image: boanlab/echo-client_2
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 65432

@@ -1,0 +1,13 @@
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+spec:
+  profile: default
+  hub: docker.io/boanlab
+  tag: dyn_ld
+  meshConfig:
+    meshMTLS:
+      cipherSuites:
+      - TLS_AES_128_GCM_SHA256
+  values:
+    global:
+      imagePullPolicy: Always
