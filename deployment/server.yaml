@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: echo-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: echo-server
+  template:
+    metadata:
+      labels:
+        app: echo-server
+    spec:
+      containers:
+      - name: echo-server
+        image: boanlab/cryptoflex-test-server
+        ports:
+        - containerPort: 54321
+      - name: verify-conn
+        image: boanlab/bpftools:in_eg 
+        imagePullPolicy: Always
+        securityContext:
+          privileged: true
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: echo-server
+spec:
+  selector:
+    app: echo-server
+  ports:
+    - protocol: TCP
+      port: 54321
+      targetPort: 54321

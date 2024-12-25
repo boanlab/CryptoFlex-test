@@ -1,7 +1,0 @@
-apiVersion: install.istio.io/v1alpha1
-kind: IstioOperator
-spec:
-  profile: default
-  hub: docker.io/boanlab
-  tag: tls_1_3
-

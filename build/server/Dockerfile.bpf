@@ -1,0 +1,12 @@
+FROM ubuntu:22.04
+
+
+RUN apt-get update && \
+    apt-get install -y iproute2 iputils-ping clang llvm make gcc linux-headers-$(uname -r) && \
+    apt-get install -y libbpf-dev vim
+
+COPY monitor.o /root/
+COPY attach_tc.sh /root/
+
+CMD ["/bin/bash", "-c" ,"/root/attach_tc.sh"]
+CMD ["/bin/bash", "-c" ,"sleep infinity"]
