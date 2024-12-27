@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: echo-server
+  name: echo-server2
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: echo-server
+      app: echo-server2
   template:
     metadata:
       labels:
-        app: echo-server
+        app: echo-server2
     spec:
       containers:
       - name: echo-server
-        image: boanlab/cryptoflex-test-server
+        image: boanlab/cryptoflex-test-server2
         ports:
-        - containerPort: 54321
+        - containerPort: 54322
       - name: tls-inspector
         image: boanlab/bpftools:in_eg 
         imagePullPolicy: Always
@@ -26,11 +26,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: echo-server
+  name: echo-server2
 spec:
   selector:
-    app: echo-server
+    app: echo-server2
   ports:
     - protocol: TCP
-      port: 54321
-      targetPort: 54321
+      port: 54322
+      targetPort: 54322

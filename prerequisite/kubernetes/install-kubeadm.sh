@@ -76,6 +76,3 @@ if [ ! -f /etc/sysctl.d/99-override_cilium_rp_filter.conf ]; then
     sudo bash -c "echo 'net.ipv4.conf.all.rp_filter = 0' > /etc/sysctl.d/99-override_cilium_rp_filter.conf"
     sudo systemctl restart systemd-sysctl
 fi
-
-echo ">> Next Step <<"
-echo "To initialize Kubernetes, run 'MULTI={true|false} ./initialize-kubeadm.sh"

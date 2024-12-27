@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: echo-client2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: echo-client2
+  template:
+    metadata:
+      labels:
+        app: echo-client2
+    spec:
+      containers:
+      - name: echo-client
+        image: boanlab/cryptoflex-test-client2
+        ports:
+        - containerPort: 65432

@@ -1,0 +1,2 @@
+sed -i 's/^COPY lib\/libbssl-compat.so/# COPY lib\/libbssl-compat.so/' vanilla-env/istio/pilot/docker/Dockerfile.proxyv2
+sed -i 's/^RUN chmod +x ${BSSL_COMPAT_ROOT}\/lib64\/${SIDECAR_LIBRARY}/# RUN chmod +x ${BSSL_COMPAT_ROOT}\/lib64\/${SIDECAR_LIBRARY}/' vanilla-env/istio/pilot/docker/Dockerfile.proxyv2
