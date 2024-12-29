@@ -1,17 +1,18 @@
-if [ -z "$HUB" ] || [ -z "$TAG" ] || [ -z "$TARGET" ]; then
-  echo "Error: HUB, TAG and TARGET must be set"
-  echo "Usage: HUB=<hub> TAG=<tag> TARGET=<target_directory> $0"
+if [ -z "$HUB" ] || [ -z "$TAG" ]; then
+  echo "Error: HUB and TAG must be set"
+  echo "Usage: HUB=<hub> TAG=<tag> $0"
   exit 1
 fi
 
-cd $TARGET/istio
-sudo make build
+cd istio || exit 1
 
-sudo HUB=$HUB TAG=$TAG make docker.pilot
-sudo HUB=$HUB TAG=$TAG make docker.proxyv2
+sudo make build || exit 1
 
-sudo docker push $HUB/pilot:$TAG 
-sudo docker push $HUB/proxyv2:$TAG
+sudo HUB=$HUB TAG=$TAG make docker.pilot || exit 1
+sudo HUB=$HUB TAG=$TAG make docker.proxyv2 || exit 1
+
+sudo docker push $HUB/pilot:$TAG  || exit 1
+sudo docker push $HUB/proxyv2:$TAG || exit 1
 
 if kubectl get ns test &>/dev/null; then
   kubectl delete ns test --force
@@ -21,11 +22,11 @@ yes | istioctl uninstall --purge
 
 cd -
 
-envsubst < cryptoflex-test/script/istio_test.yaml > cryptoflex-test/script/istio_test_tmp.yaml
+envsubst < cryptoflex-test/script/istio_test.yaml > cryptoflex-test/script/istio_test_tmp.yaml || exit 1
 
-yes | istioctl install -f cryptoflex-test/script/istio_test_tmp.yaml
+yes | istioctl install -f cryptoflex-test/script/istio_test_tmp.yaml || exit 1
 
-rm cryptoflex-test/script/istio_test_tmp.yaml
+rm cryptoflex-test/script/istio_test_tmp.yaml || exit 1
 
 kubectl create ns test && \
 ./cryptoflex-test/prerequisite/kubernetes/istio/enable-istio-injection.sh test && \

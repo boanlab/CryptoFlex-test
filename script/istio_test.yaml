@@ -9,5 +9,12 @@ spec:
     enableTracing: true
     meshMTLS:
       minProtocolVersion: TLSV1_3
-#      cipherSuites:
-#      - TLS_CHACHA20_POLY1305_SHA256
+      cipherSuites:
+      - TLS_CHACHA20_POLY1305_SHA256
+  values:
+    global:
+      imagePullPolicy: Always
+      proxy:
+        logLevel: trace
+        componentLogLevel: "misc:trace,http:debug,config:trace,client:trace,filter:debug"
+

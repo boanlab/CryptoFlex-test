@@ -1,29 +1,6 @@
 #!/bin/bash
 
-if [ "$RUNTIME" == "" ]; then
-    if [ -S /var/run/cri-dockerd.sock ]; then
-        RUNTIME="cri-docker"
-
-    elif [ -S /var/run/docker.sock ]; then
-        RUNTIME="docker"
-
-    elif [ -S /var/run/crio/crio.sock ]; then
-        RUNTIME="crio"
-
-    elif [ -S /var/run/containerd/containerd.sock ]; then
-        RUNTIME="containerd"
-
-    else # default
-        echo "Container Runtime is not detected."
-        echo
-        echo "To install Containerd, run '../containers/install-containerd.sh'."
-        echo "To install Docker, run '../containers/install-docker.sh'."
-        echo
-        echo "Note that Kubernetes v1.23.0 would be installed if Docker is installed."
-        echo "Otherwise, the latest version of Kubernetes would be installed."
-        exit
-    fi
-fi
+RUNTIME="containerd"
 
 # update repo
 sudo apt-get update

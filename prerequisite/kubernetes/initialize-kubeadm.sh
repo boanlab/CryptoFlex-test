@@ -1,10 +1,7 @@
 #!/bin/bash
 
 # check if planning to use multi nodes
-if [ "$MULTI" != "true" ] && [ "$MULTI" != "false" ]; then
-    echo "Usage: MULTI={true|false} $0"
-    exit
-fi
+MULTI=false
 
 # check if k8s_init.log exists
 if [ -f ~/k8s_init.log ]; then
